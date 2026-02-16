@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "borderless-macos",
+  "version": "1.0.0",
+  "name": "Borderless macOS",
+  "description": "Removes window title bar on macOS for tiling WM support (AeroSpace, etc.)",
+  "authors": ["andrewgazelka"],
+  "environment": "client",
+  "entrypoints": {
+    "client": ["dev.ix.borderless.BorderlessMacOS"]
+  },
+  "mixins": ["borderless-macos.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.14.14",
+    "minecraft": ">=1.21.9"
+  }
+}
