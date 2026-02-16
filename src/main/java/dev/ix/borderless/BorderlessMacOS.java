@@ -11,6 +11,19 @@ import static org.lwjgl.system.JNI.*;
  * Hides the macOS title bar while keeping NSWindowStyleMaskTitled so that
  * tiling window managers (AeroSpace, etc.) still recognise the window as
  * AXStandardWindow.
+ *
+ * Using GLFW_DECORATED=false removes NSWindowStyleMaskTitled entirely,
+ * which changes AXSubrole away from kAXStandardWindowSubrole. AeroSpace
+ * uses that subrole to decide whether a window is tileable, so the window
+ * becomes invisible to it.
+ *
+ * Instead we use the same technique as Ghostty's "hidden titlebar" mode:
+ * keep .titled, add .fullSizeContentView, make the titlebar transparent,
+ * and hide the traffic-light buttons. The window looks borderless but the
+ * accessibility subrole stays AXStandardWindow.
+ *
+ * @see <a href="https://github.com/ghostty-org/ghostty">Ghostty — HiddenTitlebarTerminalWindow.swift</a>
+ * @see <a href="https://github.com/nikitabobko/AeroSpace">AeroSpace — AxUiElementWindowType.swift</a>
  */
 public class BorderlessMacOS implements ClientModInitializer {
 
